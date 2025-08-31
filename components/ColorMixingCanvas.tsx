@@ -11,16 +11,35 @@ interface ColorMixingCanvasProps {
 export function ColorMixingCanvas({ width, height, colors, onColorHover }: ColorMixingCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  const adjustColorBySaturation = (color: [number, number, number], saturation: number): [number, number, number] => {
+    // 将饱和度从百分比转换为0-1范围
+    const s = saturation / 100;
+    
+    // 计算灰度值 (使用亮度公式: 0.299R + 0.587G + 0.114B)
+    const gray = 0.299 * color[0] + 0.587 * color[1] + 0.114 * color[2];
+    
+    // 根据饱和度在原色和灰色之间进行插值
+    return [
+      Math.round(gray + (color[0] - gray) * s),
+      Math.round(gray + (color[1] - gray) * s),
+      Math.round(gray + (color[2] - gray) * s),
+    ];
+  };
+
   const drawCircle = (
     ctx: CanvasRenderingContext2D,
     x: number,
     y: number,
     radius: number,
     color: [number, number, number],
-    brightness: number
+    brightness: number,
+    saturation: number
   ) => {
     const imageData = ctx.createImageData(width, height);
     const data = imageData.data;
+
+    // 调整颜色的饱和度
+    const adjustedColor = adjustColorBySaturation(color, saturation);
 
     for (let py = 0; py < height; py++) {
       for (let px = 0; px < width; px++) {
@@ -30,7 +49,7 @@ export function ColorMixingCanvas({ width, height, colors, onColorHover }: Color
         const distance = Math.sqrt(dx * dx + dy * dy);
 
         if (distance <= radius) {
-          const [r, g, b] = color;
+          const [r, g, b] = adjustedColor;
           data[index] = r;
           data[index + 1] = g;
           data[index + 2] = b;
@@ -76,9 +95,9 @@ export function ColorMixingCanvas({ width, height, colors, onColorHover }: Color
 
     // 创建三个光源的图像数据
     const radius = Math.min(width, height) * 0.3;
-    const redCircle = drawCircle(ctx, width * 0.3, height * 0.6, radius, [255, 0, 0], colors.red.brightness);
-    const greenCircle = drawCircle(ctx, width * 0.7, height * 0.6, radius, [0, 255, 0], colors.green.brightness);
-    const blueCircle = drawCircle(ctx, width * 0.5, height * 0.3, radius, [0, 0, 255], colors.blue.brightness);
+    const redCircle = drawCircle(ctx, width * 0.3, height * 0.6, radius, [255, 0, 0], colors.red.brightness, colors.red.saturation);
+    const greenCircle = drawCircle(ctx, width * 0.7, height * 0.6, radius, [0, 255, 0], colors.green.brightness, colors.green.saturation);
+    const blueCircle = drawCircle(ctx, width * 0.5, height * 0.3, radius, [0, 0, 255], colors.blue.brightness, colors.blue.saturation);
 
     // 混合颜色
     const mixedData = mixColors([redCircle.data, greenCircle.data, blueCircle.data]);
