@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { ColorState, ColorControls, HoveredColor } from "@/types";
 import { ControlPanel } from "@/components/ControlPanel";
 import { ColorMixingCanvas } from "@/components/ColorMixingCanvas";
@@ -70,25 +70,7 @@ export default function Home() {
     }
   };
 
-  const getMixedColor = useCallback((x: number, y: number): string => {
-    // 计算每个光源的影响程度（0-1）
-    const redInfluence = Math.max(0, Math.min(1, 1 - (Math.sqrt(Math.pow(x - 0.3, 2) + Math.pow(y - 0.6, 2)) / 0.4)));
-    const greenInfluence = Math.max(0, Math.min(1, 1 - (Math.sqrt(Math.pow(x - 0.7, 2) + Math.pow(y - 0.6, 2)) / 0.4)));
-    const blueInfluence = Math.max(0, Math.min(1, 1 - (Math.sqrt(Math.pow(x - 0.5, 2) + Math.pow(y - 0.3, 2)) / 0.4)));
-
-    // 正确的加色混合：每个光源都以其影响程度贡献最大亮度
-    const r = Math.round(255 * Math.min(1, redInfluence + greenInfluence * 0.5 + blueInfluence * 0.5));
-    const g = Math.round(255 * Math.min(1, greenInfluence + redInfluence * 0.5 + blueInfluence * 0.5));
-    const b = Math.round(255 * Math.min(1, blueInfluence + redInfluence * 0.5 + greenInfluence * 0.5));
-
-    // 当三种颜色的影响程度都接近1时，应该呈现纯白色
-    const totalInfluence = (redInfluence + greenInfluence + blueInfluence) / 3;
-    if (totalInfluence > 0.8) {
-      return 'rgb(255, 255, 255)';
-    }
-
-    return `RGB(${r}, ${g}, ${b})`;
-  }, [colors]);
+  // 移除未使用的函数
 
   const reset = useCallback(() => {
     setColors(initialState);

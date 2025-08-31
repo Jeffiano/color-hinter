@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { ColorControls } from '@/types';
 
 interface ColorMixingCanvasProps {
@@ -44,7 +44,7 @@ export function ColorMixingCanvas({ width, height, colors, onColorHover }: Color
     ];
   };
 
-  const drawCircle = (
+  const drawCircle = useCallback((
     ctx: CanvasRenderingContext2D,
     x: number,
     y: number,
@@ -96,9 +96,9 @@ export function ColorMixingCanvas({ width, height, colors, onColorHover }: Color
     }
 
     return imageData;
-  };
+  }, [width, height]);
 
-  const mixColors = (colors: Uint8ClampedArray[]) => {
+  const mixColors = useCallback((colors: Uint8ClampedArray[]) => {
     const result = new Uint8ClampedArray(width * height * 4);
     for (let i = 0; i < result.length; i += 4) {
       let r = 0, g = 0, b = 0;
@@ -123,7 +123,7 @@ export function ColorMixingCanvas({ width, height, colors, onColorHover }: Color
       result[i + 3] = Math.round(maxAlpha * 255);
     }
     return result;
-  };
+  }, [width, height]);
 
   const renderCanvas = useCallback(() => {
     const canvas = canvasRef.current;

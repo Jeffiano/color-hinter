@@ -48,7 +48,7 @@ export function ColorSlider({ label, value, onChange, color }: ColorSliderProps)
             background: `linear-gradient(to right, 
               ${color}22 0%, 
               ${color} 100%)`
-          } as any}
+          } as React.CSSProperties}
         />
       </div>
       <span className="text-xs text-right min-w-[40px]">{value}%</span>
