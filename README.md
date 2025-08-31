@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Color Hinter - 三原色加色原理演示工具
 
-## Getting Started
+这是一个交互式的网页应用，用于演示光的三原色（红、绿、蓝）加色原理。通过直观的视觉效果和实时交互，帮助用户理解颜色混合的规律。
 
-First, run the development server:
+## 功能特点
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **视觉演示**
+  - 在黑色背景上展示三个可调节的光源（红、绿、蓝）
+  - 光源之间的重叠区域展示混合后的颜色效果
+  - 符合物理加色原理的精确颜色混合
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **交互控制**
+  - 每种颜色独立的亮度控制（0-100%）
+  - 每种颜色独立的饱和度控制（0-100%）
+  - 实时反馈的颜色混合效果
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **信息显示**
+  - 实时显示鼠标指向位置的颜色RGB值
+  - 清晰的控制面板布局
+  - 直观的颜色参数展示
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 技术实现
 
-## Learn More
+- 基于 Next.js 框架开发
+- 使用 TypeScript 确保类型安全
+- 采用 Tailwind CSS 构建响应式界面
+- 使用 CSS 渐变实现光源效果
+- 精确的颜色计算算法
 
-To learn more about Next.js, take a look at the following resources:
+## 使用方法
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. 克隆项目：
+   ```bash
+   git clone https://github.com/Jeffiano/color-hinter.git
+   cd color-hinter
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. 安装依赖：
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. 启动开发服务器：
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. 打开浏览器访问 http://localhost:3000
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 交互说明
+
+- 使用滑块调节各个光源的亮度和饱和度
+- 观察重叠区域的颜色变化
+- 将鼠标悬停在任意位置可查看该点的具体RGB值
+- 使用重置按钮恢复初始状态
+
+## 教育价值
+
+这个工具可以帮助：
+- 设计师理解颜色混合原理
+- 学生学习物理光学知识
+- 艺术工作者掌握数字颜色概念
+- 任何对颜色科学感兴趣的人
+
+## 贡献
+
+欢迎提交 Issue 和 Pull Request 来帮助改进这个项目！
+
+## 许可
+
+MIT License
