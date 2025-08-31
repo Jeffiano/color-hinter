@@ -1,0 +1,82 @@
+/* 滑块轨道样式 */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  border-radius: 8px;
+  background: transparent;
+  outline: none;
+  opacity: 0.8;
+  transition: all 0.2s;
+  margin: 0;
+  width: 100%;
+  position: relative;
+  top: 0;
+}
+
+/* 滑块悬停效果 */
+.slider:hover {
+  opacity: 1;
+}
+
+/* Webkit (Chrome, Safari, Edge) 滑块按钮样式 */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s;
+  margin-top: -6px; /* 调整垂直位置 */
+}
+
+/* Firefox 滑块按钮样式 */
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s;
+}
+
+/* 滑块按钮悬停效果 */
+.slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.slider::-moz-range-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 滑块轨道背景 */
+.slider::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 8px;
+  background: var(--gradient);
+}
+
+.slider::-moz-range-track {
+  height: 8px;
+  border-radius: 8px;
+  background: var(--gradient);
+}
+
+/* 激活状态效果 */
+.slider:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.slider:active::-moz-range-thumb {
+  transform: scale(1.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}

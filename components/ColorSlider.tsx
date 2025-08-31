@@ -1,4 +1,5 @@
 import { useCallback, useRef } from 'react';
+import styles from './ColorSlider.module.css';
 
 interface ColorSliderProps {
   label: string;
@@ -25,7 +26,7 @@ export function ColorSlider({ label, value, onChange, color }: ColorSliderProps)
       <label className="text-sm font-medium min-w-[80px]" style={{ color }}>
         {label}
       </label>
-      <div className="flex-1">
+      <div className="flex-1 flex items-center">
         <input
           ref={sliderRef}
           type="range"
@@ -39,10 +40,15 @@ export function ColorSlider({ label, value, onChange, color }: ColorSliderProps)
           }}
           onMouseUp={updateValueFromSlider}
           onTouchEnd={updateValueFromSlider}
-          className="w-full h-1.5 rounded-lg appearance-none cursor-pointer"
+          className={`w-full ${styles.slider}`}
           style={{
-            background: `linear-gradient(to right, ${color}00, ${color})`,
-          }}
+            '--color-start': `${color}22`,
+            '--color-end': color,
+            '--slider-value': `${value}%`,
+            background: `linear-gradient(to right, 
+              ${color}22 0%, 
+              ${color} 100%)`
+          } as any}
         />
       </div>
       <span className="text-xs text-right min-w-[40px]">{value}%</span>

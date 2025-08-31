@@ -87,7 +87,7 @@ export default function Home() {
       return 'rgb(255, 255, 255)';
     }
 
-    return `rgb(${r}, ${g}, ${b})`;
+    return `RGB(${r}, ${g}, ${b})`;
   }, [colors]);
 
   const reset = useCallback(() => {
