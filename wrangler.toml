@@ -1,13 +1,24 @@
 [build]
 command = "npm run build"
-publish = "out"
+watch_dir = "app"
+
+[build.upload]
+format = "service-worker"
+
+[site]
+bucket = ".vercel/output/static"
+entry-point = ".vercel/output/static/_worker.js"
 
 [build.environment]
 NODE_VERSION = "18"
-NODEJS_COMPAT = "1"
 
-[site]
-bucket = "out"
+[placement]
+mode = "smart"
 
-[compatibility_flags]
-nodejs_compat = true
+[[d1_databases]]
+binding = "DB"
+database_name = "my-database"
+database_id = ""
+
+[[unsafe.compatibility_flags]]
+flag = "nodejs_compat"
