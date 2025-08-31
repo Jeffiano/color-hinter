@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npx @cloudflare/next-on-pages",
+    "build": "next build",
+    "pages:build": "npx @cloudflare/next-on-pages",
     "start": "next start",
     "lint": "eslint",
-    "pages:deploy": "npm run build && npx wrangler pages deploy .vercel/output/static"
+    "pages:deploy": "npm run build && npm run pages:build && npx wrangler pages deploy .vercel/output/static"
   },
   "dependencies": {
     "react": "19.1.0",
