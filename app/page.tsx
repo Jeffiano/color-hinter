@@ -29,25 +29,42 @@ export default function Home() {
   const [hoveredColor, setHoveredColor] = useState<HoveredColor | null>(null);
 
   const updateColor = useCallback((color: keyof ColorControls, updates: Partial<ColorState>) => {
-    setColors((prev) => ({
-      ...prev,
-      [color]: {
+    setColors((prev) => {
+      const updatedState = {
         ...prev[color],
-        ...updates,
-        rgb: calculateRGB(prev[color].brightness, prev[color].saturation, color),
-      },
-    }));
+        ...updates
+      };
+      
+      // 确保使用最新的值进行计算
+      const rgb = calculateRGB(
+        'brightness' in updates ? updates.brightness! : prev[color].brightness,
+        'saturation' in updates ? updates.saturation! : prev[color].saturation,
+        color
+      );
+
+      return {
+        ...prev,
+        [color]: {
+          ...updatedState,
+          rgb
+        }
+      };
+    });
   }, []);
 
   const calculateRGB = (brightness: number, saturation: number, color: keyof ColorControls): [number, number, number] => {
-    const value = Math.round((brightness / 100) * (saturation / 100) * 255);
+    // 确保使用精确的小数计算
+    const value = Math.round((Math.min(100, brightness) / 100) * (Math.min(100, saturation) / 100) * 255);
+    // 确保值在 0-255 范围内
+    const clampedValue = Math.min(255, Math.max(0, value));
+    
     switch (color) {
       case "red":
-        return [value, 0, 0];
+        return [clampedValue, 0, 0];
       case "green":
-        return [0, value, 0];
+        return [0, clampedValue, 0];
       case "blue":
-        return [0, 0, value];
+        return [0, 0, clampedValue];
       default:
         return [0, 0, 0];
     }

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { ColorControls } from '@/types';
 
 interface ColorMixingCanvasProps {
@@ -50,10 +50,12 @@ export function ColorMixingCanvas({ width, height, colors, onColorHover }: Color
 
         if (distance <= radius) {
           const [r, g, b] = adjustedColor;
-          data[index] = r;
-          data[index + 1] = g;
-          data[index + 2] = b;
-          data[index + 3] = 255 * (brightness / 100);
+          // 使用亮度控制颜色强度，但不影响 alpha 通道
+          const intensityFactor = brightness / 100;
+          data[index] = Math.round(r * intensityFactor);
+          data[index + 1] = Math.round(g * intensityFactor);
+          data[index + 2] = Math.round(b * intensityFactor);
+          data[index + 3] = 255; // 保持完全不透明
         }
       }
     }
@@ -64,26 +66,25 @@ export function ColorMixingCanvas({ width, height, colors, onColorHover }: Color
   const mixColors = (colors: Uint8ClampedArray[]) => {
     const result = new Uint8ClampedArray(width * height * 4);
     for (let i = 0; i < result.length; i += 4) {
-      let r = 0, g = 0, b = 0, a = 0;
+      let r = 0, g = 0, b = 0;
       
-      // 加色混合
+      // 直接加色混合，不使用 alpha 通道进行颜色混合
       colors.forEach(color => {
-        const alpha = color[i + 3] / 255;
-        r = Math.min(255, r + color[i] * alpha);
-        g = Math.min(255, g + color[i + 1] * alpha);
-        b = Math.min(255, b + color[i + 2] * alpha);
-        a = Math.max(a, alpha);
+        r = Math.min(255, r + color[i]);
+        g = Math.min(255, g + color[i + 1]);
+        b = Math.min(255, b + color[i + 2]);
       });
 
-      result[i] = r;
-      result[i + 1] = g;
-      result[i + 2] = b;
-      result[i + 3] = a * 255;
+      // 设置最终颜色值
+      result[i] = Math.round(r);
+      result[i + 1] = Math.round(g);
+      result[i + 2] = Math.round(b);
+      result[i + 3] = 255; // 保持完全不透明
     }
     return result;
   };
 
-  useEffect(() => {
+  const renderCanvas = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -105,9 +106,13 @@ export function ColorMixingCanvas({ width, height, colors, onColorHover }: Color
     // 创建并显示最终图像
     const finalImage = new ImageData(mixedData, width);
     ctx.putImageData(finalImage, 0, 0);
-  }, [width, height, colors]);
+  }, [width, height, colors, drawCircle, mixColors]);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+  useEffect(() => {
+    renderCanvas();
+  }, [renderCanvas]);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -118,14 +123,29 @@ export function ColorMixingCanvas({ width, height, colors, onColorHover }: Color
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // 强制重新绘制画布以确保获取最新的像素数据
+    const redraw = () => {
+      ctx.clearRect(0, 0, width, height);
+      const radius = Math.min(width, height) * 0.3;
+      const redCircle = drawCircle(ctx, width * 0.3, height * 0.6, radius, [255, 0, 0], colors.red.brightness, colors.red.saturation);
+      const greenCircle = drawCircle(ctx, width * 0.7, height * 0.6, radius, [0, 255, 0], colors.green.brightness, colors.green.saturation);
+      const blueCircle = drawCircle(ctx, width * 0.5, height * 0.3, radius, [0, 0, 255], colors.blue.brightness, colors.blue.saturation);
+      const mixedData = mixColors([redCircle.data, greenCircle.data, blueCircle.data]);
+      const finalImage = new ImageData(mixedData, width);
+      ctx.putImageData(finalImage, 0, 0);
+    };
+
+    redraw();
+    
+    // 获取最新的像素数据
     const pixel = ctx.getImageData(x, y, 1, 1).data;
     const color = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
     onColorHover(color, x, y);
-  };
+  }, [colors, width, height, onColorHover]);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     onColorHover(null, 0, 0);
-  };
+  }, [onColorHover]);
 
   return (
     <canvas
