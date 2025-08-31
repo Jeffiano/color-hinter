@@ -1,0 +1,11 @@
+{
+  "name": "color-hinter",
+  "compatibility_date": "2025-08-31",
+  "build": {
+    "command": "npm run build",
+    "output": "out"
+  },
+  "assets": {
+    "directory": "out"
+  }
+}
