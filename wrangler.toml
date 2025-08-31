@@ -4,6 +4,10 @@ publish = "out"
 
 [build.environment]
 NODE_VERSION = "18"
+NODEJS_COMPAT = "1"
 
 [site]
 bucket = "out"
+
+[compatibility_flags]
+nodejs_compat = true
