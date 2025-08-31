@@ -15,10 +15,15 @@ export function ControlPanel({
   displayColor,
 }: ControlPanelProps) {
   return (
-    <div className="flex flex-col gap-4 p-4 bg-white/10 rounded-lg">
-      <h3 className="text-lg font-semibold" style={{ color: displayColor }}>
-        {colorName}
-      </h3>
+    <div className="flex flex-col gap-2 py-2 px-3 bg-white/10 rounded-lg">
+      <div className="flex items-center justify-between">
+        <h3 className="text-sm font-semibold" style={{ color: displayColor }}>
+          {colorName}
+        </h3>
+        <div className="text-xs opacity-70">
+          RGB: ({color.rgb.join(", ")})
+        </div>
+      </div>
       <ColorSlider
         label="Brightness"
         value={color.brightness}
@@ -31,9 +36,6 @@ export function ControlPanel({
         onChange={(value) => onChange({ saturation: value })}
         color={displayColor}
       />
-      <div className="text-xs">
-        RGB: ({color.rgb.join(", ")})
-      </div>
     </div>
   );
 }

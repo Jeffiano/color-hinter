@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "deploy": "next build && npx wrangler pages deploy out"
+    "deploy": "npm run build && npx wrangler pages publish out --project-name=color-hinter"
   },
   "dependencies": {
     "react": "19.1.0",

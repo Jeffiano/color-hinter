@@ -7,22 +7,24 @@ interface ColorSliderProps {
 
 export function ColorSlider({ label, value, onChange, color }: ColorSliderProps) {
   return (
-    <div className="flex flex-col gap-2">
-      <label className="text-sm font-medium" style={{ color }}>
+    <div className="flex items-center gap-3">
+      <label className="text-sm font-medium min-w-[80px]" style={{ color }}>
         {label}
       </label>
-      <input
-        type="range"
-        min="0"
-        max="100"
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full h-2 rounded-lg appearance-none cursor-pointer"
-        style={{
-          background: `linear-gradient(to right, ${color}00, ${color})`,
-        }}
-      />
-      <span className="text-xs text-right">{value}%</span>
+      <div className="flex-1">
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value={value}
+          onChange={(e) => onChange(Number(e.target.value))}
+          className="w-full h-1.5 rounded-lg appearance-none cursor-pointer"
+          style={{
+            background: `linear-gradient(to right, ${color}00, ${color})`,
+          }}
+        />
+      </div>
+      <span className="text-xs text-right min-w-[40px]">{value}%</span>
     </div>
   );
 }

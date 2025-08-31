@@ -112,7 +112,7 @@ export default function Home() {
         </div>
 
         {/* Control panels */}
-        <div className="flex flex-col gap-4 w-full lg:w-80">
+        <div className="flex flex-col gap-2 w-full lg:w-[360px]">
           <ControlPanel
             color={colors.red}
             onChange={(updates) => updateColor("red", updates)}
@@ -133,7 +133,7 @@ export default function Home() {
           />
           <button
             onClick={reset}
-            className="mt-4 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
+            className="mt-2 px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg transition-colors text-sm"
           >
             Reset All
           </button>

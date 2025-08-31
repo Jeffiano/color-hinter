@@ -1,0 +1,9 @@
+{
+  "name": "color-hinter",
+  "buildCommand": "npm run build",
+  "outputDirectory": "out",
+  "framework": "nextjs",
+  "rootDirectory": ".",
+  "branch": "main",
+  "compatibility_date": "2025-08-31"
+}
