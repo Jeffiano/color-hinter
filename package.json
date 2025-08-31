@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npx @cloudflare/next-on-pages",
     "start": "next start",
     "lint": "eslint",
-    "deploy": "npm run build && npx wrangler pages publish out --project-name=color-hinter"
+    "pages:deploy": "npm run build && npx wrangler pages deploy .vercel/output/static"
   },
   "dependencies": {
     "react": "19.1.0",
