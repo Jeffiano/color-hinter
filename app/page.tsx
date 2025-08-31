@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { ColorState, ColorControls, HoveredColor } from "@/types";
 import { ControlPanel } from "@/components/ControlPanel";
 import { ColorMixingCanvas } from "@/components/ColorMixingCanvas";
+import Features from "@/components/Features";
 
 const initialState: ColorControls = {
   red: {
@@ -77,10 +78,14 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white p-8">
-      <h1 className="text-2xl font-bold mb-8 text-center">
-        Color Mixing Demonstration
-      </h1>
+    <div className="min-h-screen bg-black text-white">
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+          Interactive Color Mixing Lab
+        </h1>
+        <p className="text-xl text-center text-gray-400 mb-12 max-w-2xl mx-auto">
+          Explore the fascinating world of color theory through our interactive RGB color mixing tool. Perfect for students, designers, and color enthusiasts! 🎨
+        </p>
 
       <div className="flex flex-col lg:flex-row gap-8 items-start">
         {/* Color mixing area */}
@@ -143,6 +148,9 @@ export default function Home() {
       <div className="mt-8 text-center text-sm opacity-70">
         <p>Hover over the mixing area to see RGB values at any point.</p>
         <p>Use the sliders to adjust brightness and saturation of each color.</p>
+      </div>
+
+      <Features />
       </div>
     </div>
   );
