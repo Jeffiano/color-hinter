@@ -9,17 +9,14 @@ import Features from "@/components/Features";
 const initialState: ColorControls = {
   red: {
     brightness: 100,
-    saturation: 100,
     rgb: [255, 0, 0],
   },
   green: {
     brightness: 100,
-    saturation: 100,
     rgb: [0, 255, 0],
   },
   blue: {
     brightness: 100,
-    saturation: 100,
     rgb: [0, 0, 255],
   },
 };
@@ -38,7 +35,6 @@ export default function Home() {
       // 确保使用最新的值进行计算
       const rgb = calculateRGB(
         'brightness' in updates ? updates.brightness! : prev[color].brightness,
-        'saturation' in updates ? updates.saturation! : prev[color].saturation,
         color
       );
 
@@ -52,9 +48,9 @@ export default function Home() {
     });
   }, []);
 
-  const calculateRGB = (brightness: number, saturation: number, color: keyof ColorControls): [number, number, number] => {
+  const calculateRGB = (brightness: number, color: keyof ColorControls): [number, number, number] => {
     // 确保使用精确的小数计算
-    const value = Math.round((Math.min(100, brightness) / 100) * (Math.min(100, saturation) / 100) * 255);
+    const value = Math.round(Math.min(100, brightness) / 100 * 255);
     // 确保值在 0-255 范围内
     const clampedValue = Math.min(255, Math.max(0, value));
     
@@ -146,7 +142,7 @@ export default function Home() {
 
       <div className="mt-8 text-center text-sm opacity-70">
         <p>Hover over the mixing area to see RGB values at any point.</p>
-        <p>Use the sliders to adjust brightness and saturation of each color.</p>
+        <p>Use the sliders to adjust brightness of each color.</p>
       </div>
 
       <Features />

@@ -1,6 +1,5 @@
 export interface ColorState {
   brightness: number;
-  saturation: number;
   rgb: [number, number, number];
 }
 

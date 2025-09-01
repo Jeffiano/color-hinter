@@ -10,7 +10,7 @@ const Features = () => {
     {
       emoji: '🎯',
       title: 'Precise Control',
-      description: 'Fine-tune brightness and saturation with responsive sliders for each primary color.',
+      description: 'Fine-tune brightness with responsive sliders for each primary color.',
     },
     {
       emoji: '🔍',

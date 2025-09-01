@@ -30,12 +30,6 @@ export function ControlPanel({
         onChange={(value) => onChange({ brightness: value })}
         color={displayColor}
       />
-      <ColorSlider
-        label="Saturation"
-        value={color.saturation}
-        onChange={(value) => onChange({ saturation: value })}
-        color={displayColor}
-      />
     </div>
   );
 }
