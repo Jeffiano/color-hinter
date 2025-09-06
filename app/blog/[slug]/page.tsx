@@ -113,7 +113,7 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </div>
     );
-  } catch (error) {
+  } catch {
     notFound();
   }
 }

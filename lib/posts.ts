@@ -26,7 +26,7 @@ function parseFrontMatter(content: string) {
   const frontMatterLines = lines.slice(1, frontMatterEndIndex);
   const contentLines = lines.slice(frontMatterEndIndex + 1);
   
-  const data: any = {};
+  const data: Record<string, any> = {};
   frontMatterLines.forEach(line => {
     const colonIndex = line.indexOf(':');
     if (colonIndex > 0) {
@@ -54,7 +54,7 @@ function parseFrontMatter(content: string) {
 // 简单的 markdown 转 HTML
 function markdownToHtml(markdown: string): string {
   // 清理内容，移除开头和结尾的空白
-  let cleanContent = markdown.trim();
+  const cleanContent = markdown.trim();
   
   // 按行处理，然后重新组织成段落
   const lines = cleanContent.split('\n');
@@ -140,7 +140,7 @@ function markdownToHtml(markdown: string): string {
     }
     
     // 处理普通段落
-    let processed = para
+    const processed = para
       // 图片
       .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="inline-block max-w-full rounded-lg" />')
       // 粗体

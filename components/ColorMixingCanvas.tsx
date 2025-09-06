@@ -148,7 +148,7 @@ export function ColorMixingCanvas({ width, height, colors, onColorHover }: Color
     const pixel = ctx.getImageData(x, y, 1, 1).data;
     const color = `RGB(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
     onColorHover(color, x, y);
-  }, [colors, width, height, onColorHover]);
+  }, [colors, width, height, onColorHover, drawCircle, mixColors]);
 
   const handleMouseLeave = useCallback(() => {
     onColorHover(null, 0, 0);

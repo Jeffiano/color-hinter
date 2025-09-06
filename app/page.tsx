@@ -81,18 +81,42 @@ export default function Home() {
           <div className="text-xl font-bold text-white">Color Lab</div>
           <Link 
             href="/blog" 
-            className="px-4 py-2 bg-blue-500/20 text-blue-300 rounded-lg hover:bg-blue-500/30 transition-colors"
+            className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-lg font-semibold rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
           >
-            📝 Blog
+            📝 Color Theory Blog
           </Link>
         </nav>
 
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
           Interactive Color Mixing Lab
         </h1>
-        <p className="text-xl text-center text-gray-400 mb-12 max-w-2xl mx-auto">
+        <p className="text-xl text-center text-gray-400 mb-8 max-w-2xl mx-auto">
           Explore the fascinating world of color theory through our interactive RGB color mixing tool. Perfect for students, designers, and color enthusiasts! 🎨
         </p>
+
+        {/* Featured Blog Entry */}
+        <div className="mb-12 text-center">
+          <Link 
+            href="/blog" 
+            className="inline-block group"
+          >
+            <div className="bg-gradient-to-br from-purple-900/50 to-blue-900/50 border border-purple-500/30 rounded-2xl p-8 max-w-2xl mx-auto hover:border-purple-400/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl">
+              <div className="flex items-center justify-center mb-4">
+                <span className="text-4xl mr-3">📚</span>
+                <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                  Learn Color Theory
+                </h2>
+              </div>
+              <p className="text-gray-300 mb-4 leading-relaxed">
+                Dive deep into RGB fundamentals with our comprehensive guide: "Understanding RGB: The Foundation of Digital Color Grading"
+              </p>
+              <div className="inline-flex items-center text-purple-400 font-semibold group-hover:text-purple-300 transition-colors">
+                Read the Article
+                <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </div>
+          </Link>
+        </div>
 
       <div className="flex flex-col lg:flex-row gap-8 items-start">
         {/* Color mixing area */}
