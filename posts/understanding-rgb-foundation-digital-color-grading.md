@@ -6,9 +6,9 @@ author: "Leif Lumière"
 tags: ["photography", "color-grading", "rgb", "post-processing", "digital-imaging"]
 ---
 
-# Understanding RGB: The Foundation of Digital Color Grading
+For anyone looking to master digital photography post-processing, I always start with the **three primary colors of light (RGB)**—this is the cornerstone of digital editing, the fundamental basis of all color grading work, and a key to understanding the entire digital post-processing system.
 
-For anyone looking to master digital photography post-processing, I always start with the **three primary colors of light** (RGB) because this is the cornerstone of digital editing. It's the fundamental basis of all color grading work and plays a crucial role in understanding the entire digital post-processing system.
+*Note: 'Digital post-processing' is the broad term for editing digital images; 'digital editing' refers to basic adjustments (e.g., cropping), while 'color grading' focuses specifically on adjusting color to achieve a desired look—all of these rely on RGB.*
 
 ## 1. What Are the Three Primary Colors?
 
@@ -19,7 +19,7 @@ For anyone looking to master digital photography post-processing, I always start
 
 The three primary colors of light are **Red, Green, and Blue**. These three colors cannot be decomposed further and can be combined to create all other colors, which is why they're called "primary colors."
 
-It's important to understand that RGB isn't an optical property of light itself, but rather determined by the physiological characteristics of the human eye. If you're curious about why red, green, and blue are the primary colors of light, I encourage you to explore the science behind human vision. For photography purposes, we simply need to know that these three colors can be mixed to create virtually any other color.
+It's important to understand that RGB isn't an optical property of light itself, but is rather determined by the physiological characteristics of the human eye. If you're curious about why red, green, and blue are the primary colors of light, I encourage you to explore the science behind human vision. For photography purposes, we simply need to know that these three colors can be mixed to create virtually any other color.
 
 
 ### How Your Display Actually Works
@@ -27,6 +27,8 @@ It's important to understand that RGB isn't an optical property of light itself,
 ![details-after-monitor-enlarged](/assets/details-after-monitor-enlarged.jpg)
 
 The vast majority of our displays can only show red, green, and blue colors. Every other color you see on your screen is actually a combination of these three colors. For example, the yellow you see on your phone isn't "true" yellow—it's red and green light working together to trick your eyes. The human visual system cannot distinguish between yellow light created by mixing red and green versus actual yellow monochromatic light.
+
+Now that we've clarified what RGB (the primary colors of light) are and how displays use them, let's move to a related concept critical for color grading: complementary colors.
 
 ## 2. Understanding Complementary Colors
 
@@ -44,6 +46,8 @@ Now let's discuss the **complementary colors** of RGB. The complements of red, g
 
 But why do complementary colors mix to create white? When complementary colors (like red and cyan) enter our eyes simultaneously, all three types of cone cells in our retina are stimulated equally, and our brain interprets this as white light.
 
+For example, if you shine a red light and a cyan light onto the same white wall, the overlapping area will appear white—this is exactly how color correction tools work: to neutralize excess red, you can add a touch of cyan.
+
 ## 3. The RGB Mixing Principle
 
 ![primary-color-mixing](/assets/primary-color-mixing.jpg)
@@ -56,6 +60,8 @@ Here's the elegant principle behind RGB mixing: **Any two primary colors combine
 - **Red + Green = Yellow** (complement of blue)
 - **Green + Blue = Cyan** (complement of red)
 - **Red + Blue = Magenta** (complement of green)
+
+You can test this with a simple tool: open a photo editor, create a red layer and a green layer, and set the blending mode to 'Add'—the result will be a bright yellow, just as the formula suggests.
 
 ### Why This Pattern Exists
 
@@ -74,7 +80,7 @@ This mathematical relationship is fundamental to understanding how digital color
 
 Here are some thought-provoking questions related to this article that will help deepen your understanding of these concepts. I'll address these in upcoming posts:
 
-1. **If a color appears too red, and we want to make it neutral white, what adjustments should we make?**
+1. **Earlier we learned that 'red + cyan = white' (complementary colors). If a photo's skin tone appears too red, what adjustment should you make to turn it neutral? Why?**
 
 2. **What is the fundamental difference between white and gray colors?**
 
@@ -90,4 +96,4 @@ Here are some thought-provoking questions related to this article that will help
 
 In our next article, we'll explore **Color Temperature and White Balance**, building on these RGB fundamentals to understand how different light sources affect our images and how to correct them in post-processing.
 
-Ready to dive deeper? Check out our [Color Mixing Tool](/) to experiment with RGB combinations hands-on!
+Ready to dive deeper? Check out our [Color Mixing Tool](/) to experiment with RGB combinations hands-on! You can also practice with a free tool like GIMP: import a photo, open the 'Curves' or 'Color Balance' panel, and try adjusting the red, green, and blue channels—notice how adding green reduces magenta, or adding blue neutralizes yellow. This hands-on practice will help you internalize the RGB mixing rules we covered.

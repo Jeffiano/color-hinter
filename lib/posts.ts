@@ -54,32 +54,66 @@ function parseFrontMatter(content: string) {
 // 简单的 markdown 转 HTML
 function markdownToHtml(markdown: string): string {
   // 清理内容，移除开头和结尾的空白
-  const cleanContent = markdown.trim();
+  let cleanContent = markdown.trim();
   
-  // 分段处理
-  const paragraphs = cleanContent.split('\n\n');
+  // 按行处理，然后重新组织成段落
+  const lines = cleanContent.split('\n');
+  const processedLines: string[] = [];
+  
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    
+    // 跳过空行
+    if (!line) {
+      processedLines.push('');
+      continue;
+    }
+    
+    // 处理标题
+    if (line.startsWith('### ')) {
+      processedLines.push(`<h3 class="text-xl font-semibold mb-4 mt-6">${line.substring(4)}</h3>`);
+      continue;
+    }
+    if (line.startsWith('## ')) {
+      processedLines.push(`<h2 class="text-2xl font-bold mb-6 mt-8">${line.substring(3)}</h2>`);
+      continue;
+    }
+    if (line.startsWith('# ')) {
+      processedLines.push(`<h1 class="text-3xl font-bold mb-8">${line.substring(2)}</h1>`);
+      continue;
+    }
+    
+    // 处理图片（独立行）
+    if (line.startsWith('![') && line.includes('](')) {
+      const imgMatch = line.match(/!\[([^\]]*)\]\(([^)]+)\)/);
+      if (imgMatch) {
+        const [, alt, src] = imgMatch;
+        processedLines.push(`<img src="${src}" alt="${alt}" class="w-full max-w-2xl mx-auto rounded-lg shadow-lg my-6" />`);
+        continue;
+      }
+    }
+    
+    // 其他行保持原样，稍后处理
+    processedLines.push(line);
+  }
+  
+  // 重新组合成内容
+  const reconstructed = processedLines.join('\n');
+  
+  // 现在按段落分割处理
+  const paragraphs = reconstructed.split('\n\n');
   const processedParagraphs = paragraphs.map(para => {
     // 跳过空段落
     if (!para.trim()) return '';
     
-    // 处理图片（独立段落）
-    if (para.trim().startsWith('![') && para.trim().includes('](')) {
-      const imgMatch = para.trim().match(/!\[([^\]]*)\]\(([^)]+)\)/);
-      if (imgMatch) {
-        const [, alt, src] = imgMatch;
-        return `<img src="${src}" alt="${alt}" class="w-full max-w-2xl mx-auto rounded-lg shadow-lg my-6" />`;
-      }
+    // 如果段落已经是HTML标签（标题、图片），直接返回
+    if (para.trim().startsWith('<h') || para.trim().startsWith('<img')) {
+      return para.trim();
     }
     
-    // 处理标题
-    if (para.startsWith('### ')) {
-      return `<h3>${para.substring(4)}</h3>`;
-    }
-    if (para.startsWith('## ')) {
-      return `<h2>${para.substring(3)}</h2>`;
-    }
-    if (para.startsWith('# ')) {
-      return `<h1>${para.substring(2)}</h1>`;
+    // 如果段落已经是HTML标签（标题、图片），直接返回
+    if (para.trim().startsWith('<h') || para.trim().startsWith('<img')) {
+      return para.trim();
     }
     
     // 处理代码块
@@ -87,16 +121,22 @@ function markdownToHtml(markdown: string): string {
       const lines = para.split('\n');
       const language = lines[0].substring(3);
       const codeContent = lines.slice(1, -1).join('\n');
-      return `<pre><code class="language-${language}">${codeContent}</code></pre>`;
+      return `<pre class="bg-gray-800 text-green-400 p-4 rounded-lg overflow-x-auto my-4"><code class="language-${language}">${codeContent}</code></pre>`;
     }
     
     // 处理列表
     if (para.includes('\n- ') || para.startsWith('- ')) {
       const listItems = para.split('\n')
         .filter(line => line.startsWith('- '))
-        .map(line => `<li>${line.substring(2)}</li>`)
+        .map(line => {
+          const content = line.substring(2)
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/`(.*?)`/g, '<code class="bg-gray-700 px-1 rounded">$1</code>');
+          return `<li class="mb-2">${content}</li>`;
+        })
         .join('');
-      return `<ul>${listItems}</ul>`;
+      return `<ul class="list-disc list-inside my-4 space-y-2">${listItems}</ul>`;
     }
     
     // 处理普通段落
@@ -105,16 +145,16 @@ function markdownToHtml(markdown: string): string {
       .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="inline-block max-w-full rounded-lg" />')
       // 粗体
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      // 斜体
-      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      // 斜体（注意顺序，避免与粗体冲突）
+      .replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>')
       // 行内代码
-      .replace(/`(.*?)`/g, '<code>$1</code>')
+      .replace(/`(.*?)`/g, '<code class="bg-gray-700 px-1 rounded">$1</code>')
       // 链接
-      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-blue-400 hover:text-blue-300">$1</a>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-blue-400 hover:text-blue-300 underline">$1</a>')
       // 换行
       .replace(/\n/g, '<br>');
     
-    return `<p>${processed}</p>`;
+    return `<p class="mb-4 leading-relaxed">${processed}</p>`;
   });
   
   return processedParagraphs.filter(p => p).join('\n');
