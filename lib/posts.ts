@@ -1,0 +1,218 @@
+import fs from 'fs';
+import path from 'path';
+
+const postsDirectory = path.join(process.cwd(), 'posts');
+
+// 简单的前置 matter 解析器
+function parseFrontMatter(content: string) {
+  const lines = content.split('\n').map(line => line.replace(/\r/g, ''));
+  
+  if (lines[0] !== '---') {
+    return { data: {}, content };
+  }
+
+  let frontMatterEndIndex = -1;
+  for (let i = 1; i < lines.length; i++) {
+    if (lines[i] === '---') {
+      frontMatterEndIndex = i;
+      break;
+    }
+  }
+
+  if (frontMatterEndIndex === -1) {
+    return { data: {}, content };
+  }
+
+  const frontMatterLines = lines.slice(1, frontMatterEndIndex);
+  const contentLines = lines.slice(frontMatterEndIndex + 1);
+  
+  const data: any = {};
+  frontMatterLines.forEach(line => {
+    const colonIndex = line.indexOf(':');
+    if (colonIndex > 0) {
+      const key = line.substring(0, colonIndex).trim();
+      let value = line.substring(colonIndex + 1).trim();
+      
+      // 移除引号
+      if ((value.startsWith('"') && value.endsWith('"')) || 
+          (value.startsWith("'") && value.endsWith("'"))) {
+        value = value.slice(1, -1);
+      }
+      
+      // 处理数组 (tags)
+      if (value.startsWith('[') && value.endsWith(']')) {
+        data[key] = value.slice(1, -1).split(',').map(item => item.trim().replace(/['"]/g, ''));
+      } else {
+        data[key] = value;
+      }
+    }
+  });
+
+  return { data, content: contentLines.join('\n') };
+}
+
+// 简单的 markdown 转 HTML
+function markdownToHtml(markdown: string): string {
+  // 清理内容，移除开头和结尾的空白
+  const cleanContent = markdown.trim();
+  
+  // 分段处理
+  const paragraphs = cleanContent.split('\n\n');
+  const processedParagraphs = paragraphs.map(para => {
+    // 跳过空段落
+    if (!para.trim()) return '';
+    
+    // 处理图片（独立段落）
+    if (para.trim().startsWith('![') && para.trim().includes('](')) {
+      const imgMatch = para.trim().match(/!\[([^\]]*)\]\(([^)]+)\)/);
+      if (imgMatch) {
+        const [, alt, src] = imgMatch;
+        return `<img src="${src}" alt="${alt}" class="w-full max-w-2xl mx-auto rounded-lg shadow-lg my-6" />`;
+      }
+    }
+    
+    // 处理标题
+    if (para.startsWith('### ')) {
+      return `<h3>${para.substring(4)}</h3>`;
+    }
+    if (para.startsWith('## ')) {
+      return `<h2>${para.substring(3)}</h2>`;
+    }
+    if (para.startsWith('# ')) {
+      return `<h1>${para.substring(2)}</h1>`;
+    }
+    
+    // 处理代码块
+    if (para.startsWith('```')) {
+      const lines = para.split('\n');
+      const language = lines[0].substring(3);
+      const codeContent = lines.slice(1, -1).join('\n');
+      return `<pre><code class="language-${language}">${codeContent}</code></pre>`;
+    }
+    
+    // 处理列表
+    if (para.includes('\n- ') || para.startsWith('- ')) {
+      const listItems = para.split('\n')
+        .filter(line => line.startsWith('- '))
+        .map(line => `<li>${line.substring(2)}</li>`)
+        .join('');
+      return `<ul>${listItems}</ul>`;
+    }
+    
+    // 处理普通段落
+    let processed = para
+      // 图片
+      .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="inline-block max-w-full rounded-lg" />')
+      // 粗体
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      // 斜体
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      // 行内代码
+      .replace(/`(.*?)`/g, '<code>$1</code>')
+      // 链接
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-blue-400 hover:text-blue-300">$1</a>')
+      // 换行
+      .replace(/\n/g, '<br>');
+    
+    return `<p>${processed}</p>`;
+  });
+  
+  return processedParagraphs.filter(p => p).join('\n');
+}
+
+export interface BlogPost {
+  slug: string;
+  title: string;
+  date: string;
+  excerpt: string;
+  author: string;
+  tags: string[];
+  content: string;
+}
+
+export interface BlogPostMeta {
+  slug: string;
+  title: string;
+  date: string;
+  excerpt: string;
+  author: string;
+  tags: string[];
+}
+
+export function getSortedPostsData(): BlogPostMeta[] {
+  // Get file names under /posts
+  const fileNames = fs.readdirSync(postsDirectory);
+  
+  // Filter to only include the target article
+  const targetFile = 'understanding-rgb-foundation-digital-color-grading.md';
+  const filteredFileNames = fileNames.filter(fileName => fileName === targetFile);
+  
+  const allPostsData = filteredFileNames.map((fileName) => {
+    // Remove ".md" from file name to get slug
+    const slug = fileName.replace(/\.md$/, '');
+
+    // Read markdown file as string
+    const fullPath = path.join(postsDirectory, fileName);
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+
+    // Use our custom parser to parse the post metadata section
+    const matterResult = parseFrontMatter(fileContents);
+
+    // Combine the data with the slug
+    return {
+      slug,
+      title: matterResult.data.title || 'Untitled',
+      date: matterResult.data.date || '2024-01-01',
+      excerpt: matterResult.data.excerpt || 'No excerpt available',
+      author: matterResult.data.author || 'Unknown author',
+      tags: matterResult.data.tags || [],
+    };
+  });
+
+  // Sort posts by date
+  return allPostsData.sort((a, b) => {
+    if (a.date < b.date) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+}
+
+export function getAllPostSlugs() {
+  const fileNames = fs.readdirSync(postsDirectory);
+  
+  // Filter to only include the target article
+  const targetFile = 'understanding-rgb-foundation-digital-color-grading.md';
+  const filteredFileNames = fileNames.filter(fileName => fileName === targetFile);
+  
+  return filteredFileNames.map((fileName) => {
+    return {
+      params: {
+        slug: fileName.replace(/\.md$/, ''),
+      },
+    };
+  });
+}
+
+export async function getPostData(slug: string): Promise<BlogPost> {
+  const fullPath = path.join(postsDirectory, `${slug}.md`);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+
+  // Use our custom parser to parse the post metadata section
+  const matterResult = parseFrontMatter(fileContents);
+
+  // Use our simple markdown to HTML converter
+  const contentHtml = markdownToHtml(matterResult.content);
+
+  // Combine the data with the slug and the contentHtml
+  return {
+    slug,
+    title: matterResult.data.title,
+    date: matterResult.data.date,
+    excerpt: matterResult.data.excerpt,
+    author: matterResult.data.author,
+    tags: matterResult.data.tags || [],
+    content: contentHtml,
+  };
+}

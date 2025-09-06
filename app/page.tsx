@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import Link from "next/link";
 import { ColorState, ColorControls, HoveredColor } from "@/types";
 import { ControlPanel } from "@/components/ControlPanel";
 import { ColorMixingCanvas } from "@/components/ColorMixingCanvas";
@@ -75,6 +76,17 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="max-w-7xl mx-auto px-4 py-12">
+        {/* Navigation */}
+        <nav className="flex justify-between items-center mb-8">
+          <div className="text-xl font-bold text-white">Color Lab</div>
+          <Link 
+            href="/blog" 
+            className="px-4 py-2 bg-blue-500/20 text-blue-300 rounded-lg hover:bg-blue-500/30 transition-colors"
+          >
+            📝 Blog
+          </Link>
+        </nav>
+
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
           Interactive Color Mixing Lab
         </h1>
