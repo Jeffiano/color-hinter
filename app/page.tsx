@@ -108,7 +108,7 @@ export default function Home() {
                 </h2>
               </div>
               <p className="text-gray-300 mb-4 leading-relaxed">
-                Dive deep into RGB fundamentals with our comprehensive guide: "Understanding RGB: The Foundation of Digital Color Grading"
+                Dive deep into RGB fundamentals with our comprehensive guide: &ldquo;Understanding RGB: The Foundation of Digital Color Grading&rdquo;
               </p>
               <div className="inline-flex items-center text-purple-400 font-semibold group-hover:text-purple-300 transition-colors">
                 Read the Article

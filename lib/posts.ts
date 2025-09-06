@@ -26,7 +26,7 @@ function parseFrontMatter(content: string) {
   const frontMatterLines = lines.slice(1, frontMatterEndIndex);
   const contentLines = lines.slice(frontMatterEndIndex + 1);
   
-  const data: Record<string, any> = {};
+  const data: { [key: string]: string | string[] } = {};
   frontMatterLines.forEach(line => {
     const colonIndex = line.indexOf(':');
     if (colonIndex > 0) {
@@ -201,11 +201,11 @@ export function getSortedPostsData(): BlogPostMeta[] {
     // Combine the data with the slug
     return {
       slug,
-      title: matterResult.data.title || 'Untitled',
-      date: matterResult.data.date || '2024-01-01',
-      excerpt: matterResult.data.excerpt || 'No excerpt available',
-      author: matterResult.data.author || 'Unknown author',
-      tags: matterResult.data.tags || [],
+      title: (matterResult.data.title as string) || 'Untitled',
+      date: (matterResult.data.date as string) || '2024-01-01',
+      excerpt: (matterResult.data.excerpt as string) || 'No excerpt available',
+      author: (matterResult.data.author as string) || 'Unknown author',
+      tags: (matterResult.data.tags as string[]) || [],
     };
   });
 
@@ -248,11 +248,11 @@ export async function getPostData(slug: string): Promise<BlogPost> {
   // Combine the data with the slug and the contentHtml
   return {
     slug,
-    title: matterResult.data.title,
-    date: matterResult.data.date,
-    excerpt: matterResult.data.excerpt,
-    author: matterResult.data.author,
-    tags: matterResult.data.tags || [],
+    title: matterResult.data.title as string,
+    date: matterResult.data.date as string,
+    excerpt: matterResult.data.excerpt as string,
+    author: matterResult.data.author as string,
+    tags: (matterResult.data.tags as string[]) || [],
     content: contentHtml,
   };
 }
