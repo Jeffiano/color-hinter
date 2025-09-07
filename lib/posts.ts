@@ -183,9 +183,12 @@ export function getSortedPostsData(): BlogPostMeta[] {
   // Get file names under /posts
   const fileNames = fs.readdirSync(postsDirectory);
   
-  // Filter to only include the target article
-  const targetFile = 'understanding-rgb-foundation-digital-color-grading.md';
-  const filteredFileNames = fileNames.filter(fileName => fileName === targetFile);
+  // Include the remaining two articles
+  const targetFiles = [
+    'understanding-rgb-foundation-digital-color-grading.md',
+    'white-balance-essence-en.md'
+  ];
+  const filteredFileNames = fileNames.filter(fileName => targetFiles.includes(fileName));
   
   const allPostsData = filteredFileNames.map((fileName) => {
     // Remove ".md" from file name to get slug
@@ -222,9 +225,12 @@ export function getSortedPostsData(): BlogPostMeta[] {
 export function getAllPostSlugs() {
   const fileNames = fs.readdirSync(postsDirectory);
   
-  // Filter to only include the target article
-  const targetFile = 'understanding-rgb-foundation-digital-color-grading.md';
-  const filteredFileNames = fileNames.filter(fileName => fileName === targetFile);
+  // Include the remaining two articles
+  const targetFiles = [
+    'understanding-rgb-foundation-digital-color-grading.md',
+    'white-balance-essence-en.md'
+  ];
+  const filteredFileNames = fileNames.filter(fileName => targetFiles.includes(fileName));
   
   return filteredFileNames.map((fileName) => {
     return {

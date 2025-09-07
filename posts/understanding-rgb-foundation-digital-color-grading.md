@@ -94,6 +94,6 @@ Here are some thought-provoking questions related to this article that will help
 
 ## Next Steps
 
-In our next article, we'll explore **Color Temperature and White Balance**, building on these RGB fundamentals to understand how different light sources affect our images and how to correct them in post-processing.
+Ready to put these RGB principles into practice? Continue your color theory journey with our next guide: [White Balance Demystified](/blog/white-balance-essence-en) - learn how to fix those pesky color casts using the RGB knowledge you just mastered!
 
-Ready to dive deeper? Check out our [Color Mixing Tool](/) to experiment with RGB combinations hands-on! You can also practice with a free tool like GIMP: import a photo, open the 'Curves' or 'Color Balance' panel, and try adjusting the red, green, and blue channels—notice how adding green reduces magenta, or adding blue neutralizes yellow. This hands-on practice will help you internalize the RGB mixing rules we covered.
+You can also check out our [Color Mixing Tool](/) to experiment with RGB combinations hands-on! 
