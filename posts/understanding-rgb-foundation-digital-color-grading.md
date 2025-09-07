@@ -88,7 +88,6 @@ Here are some thought-provoking questions related to this article that will help
 
 4. **Is color an objective reality or a subjective experience?**
 
----
 
 *This foundational understanding of RGB will serve as your guide through more advanced color grading techniques. Master these basics, and you'll have the knowledge to tackle any color challenge in your digital photography workflow.*
 
