@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://color-hinter.pages.dev/sitemap.xml
+Sitemap: https://color-hinter.org/sitemap.xml
 
 # Block access to private areas (if any in the future)
 Disallow: /api/
