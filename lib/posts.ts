@@ -185,8 +185,8 @@ export function getSortedPostsData(): BlogPostMeta[] {
   
   // Include the remaining two articles
   const targetFiles = [
-    'understanding-rgb-foundation-digital-color-grading.md',
-    'white-balance-essence-en.md'
+    'rgb-basics.md',
+    'white-balance.md'
   ];
   const filteredFileNames = fileNames.filter(fileName => targetFiles.includes(fileName));
   
@@ -227,8 +227,8 @@ export function getAllPostSlugs() {
   
   // Include the remaining two articles
   const targetFiles = [
-    'understanding-rgb-foundation-digital-color-grading.md',
-    'white-balance-essence-en.md'
+    'rgb-basics.md',
+    'white-balance.md'
   ];
   const filteredFileNames = fileNames.filter(fileName => targetFiles.includes(fileName));
   
