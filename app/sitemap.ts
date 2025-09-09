@@ -1,14 +1,14 @@
-import { MetadataRoute } from 'next';
-import { getSortedPostsData } from '@/lib/posts';
-import { siteConfig } from '@/lib/seo';
+﻿import { MetadataRoute } from "next";
+import { getSortedPostsData } from "@/lib/posts";
+import { siteConfig } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getSortedPostsData();
   
   const blogEntries: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `${siteConfig.url}/blog/${post.id}`,
+    url: `${siteConfig.url}/blog/${post.slug}`,
     lastModified: new Date(post.date),
-    changeFrequency: 'monthly',
+    changeFrequency: "monthly",
     priority: 0.8,
   }));
 
@@ -16,13 +16,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: siteConfig.url,
       lastModified: new Date(),
-      changeFrequency: 'yearly',
+      changeFrequency: "yearly",
       priority: 1,
     },
     {
       url: `${siteConfig.url}/blog`,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: "weekly",
       priority: 0.9,
     },
     ...blogEntries,
