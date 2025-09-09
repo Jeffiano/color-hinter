@@ -93,6 +93,6 @@ Here are some thought-provoking questions related to this article that will help
 
 ## Next Steps
 
-Ready to put these RGB principles into practice? Continue your color theory journey with our next guide: [White Balance Demystified](/blog/white-balance-essence-en) - learn how to fix those pesky color casts using the RGB knowledge you just mastered!
+Ready to put these RGB principles into practice? Continue your color theory journey with our next guide: [White Balance Demystified](/blog/white-balance) - learn how to fix those pesky color casts using the RGB knowledge you just mastered!
 
 You can also check out our [Color Mixing Tool](/) to experiment with RGB combinations hands-on! 
