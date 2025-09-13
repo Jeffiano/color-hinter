@@ -1,6 +1,6 @@
 ---
 title: "RGB Color Codes Chart: 50+ Perfect Color Combinations for Web Design 2025"
-date: "2024-09-13"
+date: "2025-09-13"
 excerpt: "Get the exact RGB color codes for trending web design palettes. Copy-paste ready color combinations with hex codes and RGB values for your next project."
 author: "Leif Lumière"
 tags: ["rgb-color-codes", "web-design-colors-2025", "color-palette-generator", "hex-color-chart", "design-color-combinations"]

@@ -183,10 +183,11 @@ export function getSortedPostsData(): BlogPostMeta[] {
   // Get file names under /posts
   const fileNames = fs.readdirSync(postsDirectory);
   
-  // Include the remaining two articles
+  // Include all three articles
   const targetFiles = [
     'rgb-basics.md',
-    'white-balance.md'
+    'white-balance.md',
+    'rgb-color-codes-2025.md'
   ];
   const filteredFileNames = fileNames.filter(fileName => targetFiles.includes(fileName));
   
@@ -225,10 +226,11 @@ export function getSortedPostsData(): BlogPostMeta[] {
 export function getAllPostSlugs() {
   const fileNames = fs.readdirSync(postsDirectory);
   
-  // Include the remaining two articles
+  // Include all three articles
   const targetFiles = [
     'rgb-basics.md',
-    'white-balance.md'
+    'white-balance.md',
+    'rgb-color-codes-2025.md'
   ];
   const filteredFileNames = fileNames.filter(fileName => targetFiles.includes(fileName));
   

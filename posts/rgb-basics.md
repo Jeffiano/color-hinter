@@ -1,6 +1,6 @@
 ---
 title: "RGB Color Mixing Tutorial: Complete Beginner's Guide to Digital Photography"
-date: "2024-09-06"
+date: "2025-09-06"
 excerpt: "Master RGB color mixing fundamentals for digital photography and design. Learn how red, green, and blue create every color in your camera and computer screen."
 author: "Leif Lumière"
 tags: ["rgb-color-mixing", "digital-photography-tutorial", "color-theory-basics", "photography-beginner-guide", "color-grading-101"]

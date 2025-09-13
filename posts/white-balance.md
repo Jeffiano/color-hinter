@@ -1,6 +1,6 @@
 ---
 title: "How to Fix Yellow and Blue Color Casts in Photography: White Balance Guide 2025"
-date: "2024-09-07"
+date: "2025-09-07"
 excerpt: "Stop wondering why your indoor photos look yellow or outdoor shots turn blue. Learn to fix color casts with proper white balance techniques and tools."
 author: "Leif Lumière"
 tags: ["white-balance-photography", "fix-yellow-photos", "color-cast-correction", "photography-tips-2025", "indoor-photography-guide"]
