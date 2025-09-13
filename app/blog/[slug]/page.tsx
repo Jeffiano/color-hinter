@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import type { ResolvingMetadata } from 'next';
 import { getPostData, getAllPostSlugs } from '@/lib/posts';
 import { siteConfig } from '@/lib/seo';
 
@@ -22,8 +21,7 @@ interface Props {
 }
 
 export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
+  { params }: Props
 ): Promise<Metadata> {
   const { slug } = await params;
   

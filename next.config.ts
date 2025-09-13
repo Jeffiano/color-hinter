@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
   
   // 性能优化
   experimental: {
-    optimizeCss: true,
+    // optimizeCss: true, // 禁用以解决 Cloudflare 部署问题
     scrollRestoration: true
   },
   
