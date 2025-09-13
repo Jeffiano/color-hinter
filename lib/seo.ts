@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Color Hinter - RGB Color Mixing Tool",
   description: "Master color theory and digital color grading with our professional interactive RGB color mixing tool. Learn color fundamentals, white balance, and advanced photo editing techniques for photography and design.",
-  url: "https://color-hinter.org",
+  url: "https://www.color-hinter.org",
   ogImage: "/og-image.svg",
   keywords: [
     // 主要关键词
@@ -39,6 +39,6 @@ export const authors = {
   "Leif Lumière": {
     name: "Leif Lumière",
     bio: "Expert in digital color theory and photography post-processing",
-    url: "https://color-hinter.org"
+    url: "https://www.color-hinter.org"
   }
 }

@@ -6,7 +6,7 @@ Allow: /blog/
 Allow: /public/assets/
 
 # Sitemaps
-Sitemap: https://color-hinter.org/sitemap.xml
+Sitemap: https://www.color-hinter.org/sitemap.xml
 
 # 阻止访问私有和技术目录
 Disallow: /api/
