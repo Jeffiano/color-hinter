@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import type { ResolvingMetadata } from 'next';
 import { getPostData, getAllPostSlugs } from '@/lib/posts';
 import { siteConfig } from '@/lib/seo';
 
@@ -14,13 +15,16 @@ function formatDate(dateString: string) {
   });
 }
 
-type Props = {
+interface Props {
   params: Promise<{
     slug: string;
   }>;
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
   const { slug } = await params;
   
   try {
