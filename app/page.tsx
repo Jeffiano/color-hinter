@@ -74,8 +74,9 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <div className="max-w-7xl mx-auto px-4 py-12">
+    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+      <div className="max-w-7xl mx-auto px-4 py-12 w-full"
+           style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
         {/* Navigation */}
         <nav className="flex justify-between items-center mb-8">
           <div className="text-xl font-bold text-white">Color Lab</div>
@@ -147,7 +148,7 @@ export default function Home() {
         </div>
 
         {/* Control panels */}
-        <div className="flex flex-col gap-2 w-full lg:w-[360px]">
+        <div className="flex flex-col gap-2 w-full lg:w-[360px] min-w-0 overflow-hidden">
           <ControlPanel
             color={colors.red}
             onChange={(updates) => updateColor("red", updates)}

@@ -21,6 +21,16 @@ export function ColorSlider({ label, value, onChange, color }: ColorSliderProps)
     }
   }, [value, onChange]);
 
+  // 处理触摸开始 - 阻止页面滚动
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    e.stopPropagation();
+  }, []);
+
+  // 处理触摸移动 - 阻止页面滚动
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    e.stopPropagation();
+  }, []);
+
   return (
     <div className="flex items-center gap-3">
       <label className="text-sm font-medium min-w-[80px]" style={{ color }}>
@@ -40,6 +50,8 @@ export function ColorSlider({ label, value, onChange, color }: ColorSliderProps)
           }}
           onMouseUp={updateValueFromSlider}
           onTouchEnd={updateValueFromSlider}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
           className={`w-full ${styles.slider}`}
           style={{
             '--color-start': `${color}22`,

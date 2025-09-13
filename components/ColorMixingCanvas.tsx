@@ -72,6 +72,8 @@ export function ColorMixingCanvas({ maxSize = 600, colors, onColorHover, classNa
     brightness: number
   ) => {
     const logicalSize = displaySize;
+    if (logicalSize <= 0) return ctx.createImageData(1, 1); // 防止无效尺寸
+    
     const imageData = ctx.createImageData(logicalSize, logicalSize);
     const data = imageData.data;
     const featherSize = 2; // 边缘羽化的大小
@@ -117,6 +119,8 @@ export function ColorMixingCanvas({ maxSize = 600, colors, onColorHover, classNa
 
   const mixColors = useCallback((colors: Uint8ClampedArray[]) => {
     const logicalSize = displaySize;
+    if (logicalSize <= 0) return new Uint8ClampedArray(4); // 防止无效尺寸
+    
     const result = new Uint8ClampedArray(logicalSize * logicalSize * 4);
     for (let i = 0; i < result.length; i += 4) {
       let r = 0, g = 0, b = 0;

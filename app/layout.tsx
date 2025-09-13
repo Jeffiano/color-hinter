@@ -103,7 +103,6 @@ export default function RootLayout({
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        aria-hidden="true"
       >
         {children}
       </body>

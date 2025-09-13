@@ -12,6 +12,11 @@
   width: 100%;
   position: relative;
   top: 0;
+  /* 禁用页面滑动，只允许滑块水平拖拽 */
+  touch-action: pan-x;
+  /* 防止选中 */
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* 滑块悬停效果 */

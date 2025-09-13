@@ -1,12 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  images: {
-    unoptimized: true
-  },
-  typescript: {
-    ignoreBuildErrors: true
-  }
+  // 最小化配置，避免任何潜在冲突
+  reactStrictMode: true,
+  swcMinify: true
 };
 
 export default nextConfig;
