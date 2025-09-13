@@ -14,10 +14,10 @@ function formatDate(dateString: string) {
   });
 }
 
-interface Props {
-  params: {
+type Props = {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

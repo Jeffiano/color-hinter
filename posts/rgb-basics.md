@@ -1,9 +1,9 @@
 ---
-title: "Understanding RGB: The Foundation of Digital Color Grading"
+title: "RGB Color Mixing Tutorial: Complete Beginner's Guide to Digital Photography"
 date: "2024-09-06"
-excerpt: "Discover why RGB (Red, Green, Blue) is the cornerstone of digital post-processing and the fundamental basis for all color grading work."
+excerpt: "Master RGB color mixing fundamentals for digital photography and design. Learn how red, green, and blue create every color in your camera and computer screen."
 author: "Leif Lumière"
-tags: ["photography", "color-grading", "rgb", "post-processing", "digital-imaging"]
+tags: ["rgb-color-mixing", "digital-photography-tutorial", "color-theory-basics", "photography-beginner-guide", "color-grading-101"]
 ---
 
 For anyone looking to master digital photography post-processing, I always start with the **three primary colors of light (RGB)**—this is the cornerstone of digital editing, the fundamental basis of all color grading work, and a key to understanding the entire digital post-processing system.

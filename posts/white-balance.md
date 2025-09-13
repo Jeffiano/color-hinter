@@ -1,9 +1,9 @@
 ---
-title: "White Balance Demystified: Why Your Photos Look Tinted (and How to Fix It)"
+title: "How to Fix Yellow and Blue Color Casts in Photography: White Balance Guide 2025"
 date: "2024-09-07"
-excerpt: "Ever wonder why your indoor photos turn out yellow or your outdoor shots look too blue? Let's crack the code of white balance and fix those pesky color casts once and for all."
+excerpt: "Stop wondering why your indoor photos look yellow or outdoor shots turn blue. Learn to fix color casts with proper white balance techniques and tools."
 author: "Leif Lumière"
-tags: ["photography", "white-balance", "color-temperature", "post-processing", "digital-imaging"]
+tags: ["white-balance-photography", "fix-yellow-photos", "color-cast-correction", "photography-tips-2025", "indoor-photography-guide"]
 ---
 
 Ever taken a photo indoors only to find that white wall looking suspiciously yellow? Or maybe your outdoor shots have an unwelcome blue tint that makes everything look cold and uninviting? Don't worry—you're not alone, and you're definitely not going crazy! 
