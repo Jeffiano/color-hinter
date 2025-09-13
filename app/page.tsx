@@ -120,10 +120,9 @@ export default function Home() {
 
       <div className="flex flex-col lg:flex-row gap-8 items-start">
         {/* Color mixing area */}
-        <div className="relative mx-auto" aria-hidden="true" role="presentation">
+        <div className="relative mx-auto w-full max-w-[600px]" aria-hidden="true" role="presentation">
           <ColorMixingCanvas
-            width={600}
-            height={600}
+            maxSize={600}
             colors={colors}
             onColorHover={(color, x, y) => {
               if (color) {
