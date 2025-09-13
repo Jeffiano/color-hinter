@@ -189,7 +189,6 @@ export function ColorMixingCanvas({ maxSize = 600, colors, onColorHover, classNa
     // 创建并显示最终图像：先放入逻辑，再缩放绘制到主画布
     const finalImage = new ImageData(mixedData, logicalSize);
     lctx.putImageData(finalImage, 0, 0);
-    const dpr = dprRef.current;
     // 清理主画布（逻辑坐标）
     ctx.save();
     ctx.setTransform(1, 0, 0, 1, 0, 0); // 重置再清除
@@ -240,10 +239,9 @@ export function ColorMixingCanvas({ maxSize = 600, colors, onColorHover, classNa
           width={displaySize || 0}
           height={displaySize || 0}
           onPointerMove={handlePointerMove}
-            // 兼容旧浏览器：
-          onMouseMove={handlePointerMove as any}
+          onMouseMove={handlePointerMove}
           onPointerLeave={handlePointerLeave}
-          onMouseLeave={handlePointerLeave as any}
+          onMouseLeave={handlePointerLeave}
           className="bg-black rounded-lg w-full h-full block touch-none select-none"
           role="img"
           aria-label="RGB additive color mixing simulation"
