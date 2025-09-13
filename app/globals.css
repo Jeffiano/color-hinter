@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./gradient-text.css";
 
 :root {
   --background: #ffffff;

@@ -1,14 +1,27 @@
 User-agent: *
 Allow: /
 
+# 优先抓取主要内容
+Allow: /blog/
+Allow: /public/assets/
+
 # Sitemaps
 Sitemap: https://color-hinter.org/sitemap.xml
 
-# Block access to private areas (if any in the future)
+# 阻止访问私有和技术目录
 Disallow: /api/
 Disallow: /_next/
 Disallow: /admin/
+Disallow: /.well-known/
+Disallow: /node_modules/
 
-# Allow all other content
-Allow: /blog/
-Allow: /public/
+# 允许搜索引擎缓存
+User-agent: *
+Crawl-delay: 1
+
+# 特殊爬虫配置
+User-agent: Googlebot
+Crawl-delay: 0
+
+User-agent: Bingbot
+Crawl-delay: 1

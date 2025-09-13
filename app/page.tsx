@@ -7,6 +7,29 @@ import { ControlPanel } from "@/components/ControlPanel";
 import { ColorMixingCanvas } from "@/components/ColorMixingCanvas";
 import Features from "@/components/Features";
 
+// SEO 优化：添加主页面的结构化数据
+const pageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Interactive RGB Color Mixing Tool",
+  "description": "Professional RGB color mixing tool for learning color theory, digital art, and photography. Real-time color blending with precise controls.",
+  "url": "https://color-hinter.org",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Real-time RGB color mixing",
+    "Interactive color theory learning",
+    "Precise brightness controls",
+    "Mobile-responsive design",
+    "Educational tooltips and guides"
+  ]
+};
+
 const initialState: ColorControls = {
   red: {
     brightness: 100,
@@ -74,26 +97,36 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
-      <div className="max-w-7xl mx-auto px-4 py-12 w-full"
-           style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
-        {/* Navigation */}
-        <nav className="flex justify-between items-center mb-8">
-          <div className="text-xl font-bold text-white">Color Lab</div>
-          <Link 
-            href="/blog" 
-            className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-lg font-semibold rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-          >
-            📝 Color Theory Blog
-          </Link>
-        </nav>
+    <>
+      {/* 结构化数据 */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageJsonLd) }}
+      />
+      
+      <div className="min-h-screen bg-black text-white overflow-x-hidden">
+        <div className="max-w-7xl mx-auto px-4 py-12 w-full"
+             style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
+          {/* Navigation */}
+          <nav className="flex justify-between items-center mb-8" role="navigation" aria-label="Main navigation">
+            <div className="text-xl font-bold text-white">Color Lab</div>
+            <Link 
+              href="/blog" 
+              className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-lg font-semibold rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+              aria-label="Visit our color theory blog"
+            >
+              📝 Color Theory Blog
+            </Link>
+          </nav>
 
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-          Interactive Color Mixing Lab
-        </h1>
-        <p className="text-xl text-center text-gray-400 mb-8 max-w-2xl mx-auto">
-          Explore the fascinating world of color theory through our interactive RGB color mixing tool. Perfect for students, designers, and color enthusiasts! 🎨
-        </p>
+          <header>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center gradient-text">
+              Interactive RGB Color Mixing Tool
+            </h1>
+            <p className="text-xl text-center text-gray-400 mb-8 max-w-2xl mx-auto">
+              Master color theory through our professional RGB color mixing tool. Perfect for students, designers, and color enthusiasts learning digital art and photography! 🎨
+            </p>
+          </header>
 
         {/* Featured Blog Entry */}
         <div className="mb-12 text-center">
@@ -104,7 +137,7 @@ export default function Home() {
             <div className="bg-gradient-to-br from-purple-900/50 to-blue-900/50 border border-purple-500/30 rounded-2xl p-8 max-w-2xl mx-auto hover:border-purple-400/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl">
               <div className="flex items-center justify-center mb-4">
                 <span className="text-4xl mr-3">📚</span>
-                <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                <h2 className="text-2xl font-bold gradient-text-purple-blue">
                   Learn Color Theory
                 </h2>
               </div>
@@ -182,7 +215,8 @@ export default function Home() {
       </div>
 
       <Features />
+        </div>
       </div>
-    </div>
+    </>
   );
 }

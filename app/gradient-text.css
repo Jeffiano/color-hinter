@@ -1,0 +1,83 @@
+/* 渐变文字的兼容性样式 */
+.gradient-text {
+  /* 基础文字颜色作为降级方案 */
+  color: #3b82f6 !important; /* blue-500 */
+  
+  /* 渐变文字 - 使用所有浏览器前缀 */
+  background: linear-gradient(to right, #3b82f6, #8b5cf6, #ec4899) !important;
+  background: -webkit-linear-gradient(to right, #3b82f6, #8b5cf6, #ec4899) !important;
+  background: -moz-linear-gradient(to right, #3b82f6, #8b5cf6, #ec4899) !important;
+  background: -o-linear-gradient(to right, #3b82f6, #8b5cf6, #ec4899) !important;
+  
+  /* 背景裁剪 - 添加所有前缀 */
+  -webkit-background-clip: text !important;
+  -moz-background-clip: text !important;
+  background-clip: text !important;
+  
+  /* 文字透明 - 添加前缀 */
+  -webkit-text-fill-color: transparent !important;
+  -moz-text-fill-color: transparent !important;
+}
+
+/* 修复 Safari 和某些移动浏览器的问题 */
+.gradient-text {
+  /* 强制重绘 */
+  transform: translateZ(0);
+  will-change: background;
+}
+
+/* 不支持背景裁剪的浏览器降级 */
+@supports not (-webkit-background-clip: text) {
+  .gradient-text {
+    color: #3b82f6 !important;
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+    -moz-text-fill-color: initial !important;
+  }
+}
+
+/* iOS Safari 特殊处理 */
+@supports (-webkit-touch-callout: none) {
+  .gradient-text {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-attachment: fixed;
+  }
+}
+
+/* 特殊处理某些移动浏览器 */
+.gradient-text-purple-blue {
+  color: #8b5cf6 !important; /* purple-500 降级色 */
+  background: linear-gradient(to right, #a855f7, #3b82f6) !important;
+  background: -webkit-linear-gradient(to right, #a855f7, #3b82f6) !important;
+  -webkit-background-clip: text !important;
+  -moz-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  -moz-text-fill-color: transparent !important;
+  transform: translateZ(0);
+}
+
+@supports not (-webkit-background-clip: text) {
+  .gradient-text-purple-blue {
+    color: #8b5cf6 !important;
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+    -moz-text-fill-color: initial !important;
+  }
+}
+
+/* 调试模式 - 开发环境中显示边框帮助识别问题 */
+@media screen and (max-width: 768px) {
+  .gradient-text,
+  .gradient-text-purple-blue {
+    /* 临时调试边框 */
+    /* border: 1px solid red; */
+    /* 确保字体加载 */
+    font-family: inherit;
+    /* 防止文字被裁剪 */
+    line-height: 1.2;
+    display: block;
+    word-wrap: break-word;
+  }
+}

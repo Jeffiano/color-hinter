@@ -1,5 +1,37 @@
 import Link from 'next/link';
+import { Metadata } from 'next';
 import { getSortedPostsData } from '@/lib/posts';
+import { siteConfig } from '@/lib/seo';
+
+// SEO 元数据
+export const metadata: Metadata = {
+  title: 'Color Theory Blog - Expert Guides & Tutorials',
+  description: 'Comprehensive color theory guides, RGB tutorials, and digital photography tips. Learn color grading, white balance, and advanced photo editing techniques from experts.',
+  keywords: [
+    'color theory blog',
+    'RGB tutorials',
+    'digital photography guides',
+    'color grading tutorials',
+    'white balance guides',
+    'photo editing tips',
+    'color correction blog',
+    'photography education'
+  ],
+  openGraph: {
+    title: 'Color Theory Blog - Expert Guides & Tutorials',
+    description: 'Master color theory with our comprehensive guides and tutorials on RGB, color grading, and digital photography.',
+    url: `${siteConfig.url}/blog`,
+    type: 'website',
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: 'Color Theory Blog'
+      }
+    ]
+  }
+};
 
 // 简单的日期格式化函数
 function formatDate(dateString: string) {
@@ -19,7 +51,7 @@ export default async function BlogPage() {
       <div className="max-w-4xl mx-auto px-4 py-12">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
             Color Theory Blog
           </h1>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">

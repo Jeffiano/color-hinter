@@ -66,7 +66,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // JSON-LD structured data
+  // 增强的 JSON-LD 结构化数据
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -85,12 +85,29 @@ export default function RootLayout({
       '@type': 'Person',
       name: 'Leif Lumière',
       url: siteConfig.url,
+      jobTitle: 'Digital Color Theory Expert',
+      knowsAbout: ['Color Theory', 'Digital Photography', 'Color Grading', 'RGB Color Mixing']
     },
     publisher: {
       '@type': 'Organization',
       name: siteConfig.name,
       url: siteConfig.url,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${siteConfig.url}/og-image.svg`
+      }
     },
+    mainEntity: {
+      '@type': 'SoftwareApplication',
+      name: 'RGB Color Mixing Tool',
+      applicationCategory: 'EducationalApplication',
+      operatingSystem: 'Web Browser',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD'
+      }
+    }
   };
 
   return (
